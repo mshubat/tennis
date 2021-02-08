@@ -1,10 +1,24 @@
 <html>
   <head> </head>
   <body>
-    <b>Matt Shubat</b> was here ...
+    <p><b>Matt Shubat</b> was here...</p>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
 
     <script>
-      console.log("hello sir");
+      var canvas;
+      var canvasContext;
+
+      window.onload = () => {
+        console.log("hello sir");
+        canvas = document.getElementById('gameCanvas');
+        canvasContext = canvas.getContext('2d');
+        canvasContext.fillStyle = 'black';
+        canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+        canvasContext.fillStyle = 'red';
+        canvasContext.fillRect(700, 500, 100, 100);
+
+
+      }
     </script>
 
   </body>
