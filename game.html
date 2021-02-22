@@ -7,19 +7,29 @@
     <script>
       var canvas;
       var canvasContext;
+      var ballX = 50;
+      var ballY;
 
       window.onload = () => {
-        console.log("hello sir");
-        canvas = document.getElementById('gameCanvas');
-        canvasContext = canvas.getContext('2d');
-        canvasContext.fillStyle = 'black';
+        // board setup
+        canvas = document.getElementById("gameCanvas");
+        canvasContext = canvas.getContext("2d");
+
+        let timerId = setInterval(drawEverything, 1000);
+        setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
+      };
+
+      const drawEverything = () => {
+        ballX += 10;
+
+        console.log("ballX", ballX);
+        canvasContext.fillStyle = "black";
         canvasContext.fillRect(0, 0, canvas.width, canvas.height);
-        canvasContext.fillStyle = 'red';
-        canvasContext.fillRect(700, 500, 100, 100);
-
-
-      }
+        canvasContext.fillStyle = "red";
+        canvasContext.fillRect(100, 100, 50, 50);
+        canvasContext.fillStyle = "white";
+        canvasContext.fillRect( ballX, canvas.height / 2 - 5, 10, 10);
+      };
     </script>
-
   </body>
 </html>
