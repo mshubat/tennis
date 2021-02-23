@@ -4,45 +4,6 @@
     <p><b>Matt Shubat</b> was here...</p>
     <canvas id="gameCanvas" width="800" height="600"></canvas>
 
-    <script>
-      var canvas;
-      var canvasContext;
-      var ballX = 50;
-      var ballY;
-      var increment = 1;
-
-      window.onload = () => {
-        // board setup
-        canvas = document.getElementById("gameCanvas");
-        canvasContext = canvas.getContext("2d");
-        drawBackground();
-
-        const fps = 144;
-        let timerId = setInterval(drawEverything, 1000/fps);
-        setTimeout(() => { clearInterval(timerId); alert('stop'); }, 50000);
-      };
-
-      const drawEverything = () => {
-
-        if (ballX === 0 || ballX === canvas.width) {
-          increment = increment*-1;
-        }
-
-        ballX += increment;
-
-
-        drawBackground();
-        console.log(ballX);
-        canvasContext.fillStyle = "red";
-        canvasContext.fillRect(100, 150, 50, 50);
-        canvasContext.fillStyle = "white";
-        canvasContext.fillRect( ballX, 100, 10, 10);
-      };
-
-      const drawBackground = () => {
-        canvasContext.fillStyle = "black";
-        canvasContext.fillRect(0, 0, canvas.width, canvas.height);
-      }
-    </script>
+    <script type="text/javascript" src="./code.js"></script>
   </body>
 </html>
