@@ -11,7 +11,7 @@ var player1Score = 0;
 var player2Score = 0;
 const WINNING_SCORE = 3;
 
-var showingWinScreen = 0;
+var showingWinScreen = false;
 
 const BALL_SIZE = 10;
 var ballX = 50;
@@ -32,8 +32,10 @@ const calculateMousePos = (evt) => {
 }
 
 const handleMouseClick = () => {
-  if (showingWinScreen != 0) {
-    showingWinScreen = 0;
+  if (showingWinScreen) {
+    player1Score = 0;
+    player2Score = 0;
+    showingWinScreen = false;
   }
 };
 
@@ -61,9 +63,7 @@ window.onload = () => {
 const ballReset = () => {
 
   if (player1Score === WINNING_SCORE || player2Score === WINNING_SCORE) {
-    showingWinScreen = player1Score === WINNING_SCORE ? 1 : 2;
-    player1Score = 0;
-    player2Score = 0;
+    showingWinScreen = true;
   }
 
 
@@ -97,12 +97,12 @@ const increaseBallSpeedX = () => {
 const updateEverything = () => {
   console.log("ball", {ballX, ballY});
 
-  if (showingWinScreen != 0) {
+  if (showingWinScreen) {
     colorRect(0, 0, canvas.width, canvas.height, "black");
     ctx.font = "15px Arial";
     ctx.fillStyle = "white";
-    ctx.fillText("Player " + showingWinScreen + " Wins!", 10, 60);
-    ctx.fillText("Click to Continue.", 10, 80);
+    ctx.fillText("Player " + (player1Score === WINNING_SCORE ? "1" : "2") + " Wins!", canvas.width/2, 60);
+    ctx.fillText("Click to Continue.", canvas.width/2, 80);
     return;
   }
 
@@ -147,12 +147,13 @@ const updateEverything = () => {
 };
 
 const drawEverything = () => {
-  if (showingWinScreen != 0) {
+  if (showingWinScreen) {
     return;
   }
 
   // board
   colorRect(0, 0, canvas.width, canvas.height, "black");
+  drawNet();
 
   // scores
   drawScores();
@@ -184,5 +185,16 @@ const drawScores = () => {
   ctx.fillStyle = "white";
   ctx.fillText(player1Score, 100, 30);
   ctx.fillText(player2Score, canvas.width - 110, 30);
+};
+
+const drawNet = () => {
+  const leftX = 400;
+  const topY = 80;
+
+  ctx.fillStyle = "white";
+
+  for (i = 5 ; i < canvas.height; i+=30) {
+    ctx.fillRect((canvas.width/2) - 1, i, 2, 20);
+  } 
 };
 
